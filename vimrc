@@ -329,6 +329,10 @@ endfun
     nmap OC l
     nmap OD h
   endif
+" auto indent after inserting a newline after a brace
+  inoremap {<CR> {<CR>}<ESC>O
+  "inoremap [<CR> [<CR>]<ESC>O
+  "inoremap (<CR> (<CR>)<ESC>O
 "}
 
 
