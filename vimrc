@@ -217,6 +217,9 @@ nmap <leader>p :set paste!<Bar>set paste?<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" fast switch indentation between space and tab using ,et
+map ,et :set et!<cr>:echo "ExpandTAB="&et<cr>
+
 " :cd. change working directory to that of the current file
 cmap cd. lcd %:p:h
 
