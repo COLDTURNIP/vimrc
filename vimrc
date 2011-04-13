@@ -107,8 +107,8 @@ set tm=500
 
   au FileType Makefile set noexpandtab
 
-  " show tabs as ">---"
-  set listchars=tab:>-
+  " show tabs as "»···"
+  set listchars=tab:»·,trail:·
   set list
 
   " settings for specific file types
