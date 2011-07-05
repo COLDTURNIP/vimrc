@@ -49,3 +49,6 @@
 [submodule "bundle/go_syntax"]
 	path = bundle/go_syntax
 	url = https://github.com/vim-scripts/go.vim.git
+[submodule "bundle/scala-vim-support"]
+	path = bundle/scala-vim-support
+	url = https://github.com/rosstimson/scala-vim-support.git
