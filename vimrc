@@ -303,6 +303,10 @@ endfun
 " PLUGIN SETTINGS
 "---------------------------------------------------------------------------
 
+" --- EasyMotion {
+  "let g:EasyMotion_leader_key = '<leader>m'
+"}
+
 " ------- vim-latex - many latex shortcuts and snippets {
   " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
   " can be called correctly.

@@ -52,3 +52,6 @@
 [submodule "bundle/scala-vim-support"]
 	path = bundle/scala-vim-support
 	url = https://github.com/rosstimson/scala-vim-support.git
+[submodule "bundle/easymotion"]
+	path = bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
