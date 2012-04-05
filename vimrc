@@ -11,12 +11,13 @@ call pathogen#helptags()
 
 " General Settings
 
-set nocompatible " not compatible with the old-fashion vi mode
-set bs=2         " allow backspacing over everything in insert mode
-set history=50   " keep 50 lines of command line history
-set number       " show line number in default
-set ruler        " show the cursor position all the time
-set autoread     " auto read when file is changed from outside
+set nocompatible   " not compatible with the old-fashion vi mode
+set bs=2           " allow backspacing over everything in insert mode
+set history=50     " keep 50 lines of command line history
+set number         " show line number in default
+set relativenumber " show related line number in default
+set ruler          " show the cursor position all the time
+set autoread       " auto read when file is changed from outside
 
 
 filetype on           " Enable filetype detection
