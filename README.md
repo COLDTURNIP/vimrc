@@ -35,12 +35,12 @@ then you may need to roll-back your parent repository and re-update submodules
 to solve it. There's a good tutorial to solve such problems:
 
 * [Stackoverflow: Git submodule head](http://stackoverflow.com/questions/2155887/git-submodule-head)
-  
+
 UPGRADE PLUGIN BUNDLES
 ----------------------
 
-All plugins (except vim-latex) were checked out as git submodules, 
-which can be upgraded with `git pull`. For example, to upgrade Command-T 
+All plugins (except vim-latex) were checked out as git submodules,
+which can be upgraded with `git pull`. For example, to upgrade Command-T
 
      $ cd ~/.vim/bundle/command-t
      $ git pull
@@ -59,22 +59,17 @@ PLUGINS
 
 * [vim-surround](https://github.com/tpope/vim-surround/blob/master/doc/surround.txt): deal with pairs of surroundings.
 
-* [matchit](http://www.vim.org/scripts/script.php?script_id=39): extended % matching for HTML, LaTeX, and many other languages. 
+* [matchit](http://www.vim.org/scripts/script.php?script_id=39): extended % matching for HTML, LaTeX, and many other languages.
 
 * [xmledit](http://www.vim.org/scripts/script.php?script_id=301): XML/HTML tags will be completed automatically.
 
 * [Command-T](https://github.com/wincent/Command-T): open and navigate between files with `cmd-t`.
-  
-* [YankRing](http://www.vim.org/scripts/script.php?script_id=1234): Maintains a history of previous yanks, changes and deletes 
-  
+
+* [YankRing](http://www.vim.org/scripts/script.php?script_id=1234): Maintains a history of previous yanks, changes and deletes
+
   `:help yankring` to see more info.
 
 * [VisIncr](http://www.vim.org/scripts/script.php?script_id=670): Produce increasing/decreasing columns of numbers, dates, or daynames.
-  
-* [Cute Error Marker](http://www.vim.org/scripts/script.php?script_id=2653): showing error and warning icons on line.
-  
-   Note: MacVim users need to enable "Use experimental renderer" to see
-   graphical icons.
 
 * [vim-latex](http://vim-latex.sourceforge.net/): Latex support.
 
