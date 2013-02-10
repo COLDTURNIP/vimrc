@@ -5,12 +5,7 @@
 " read https://github.com/COLDTURNIP/vimrc/blob/master/README.md for more info
 
 
-" For pathogen.vim: auto load all plugins in .vim/bundle
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-
 " General Settings
-
 set nocompatible   " not compatible with the old-fashion vi mode
 set bs=2           " allow backspacing over everything in insert mode
 set history=50     " keep 50 lines of command line history
@@ -545,5 +540,10 @@ endfun
 
 " --- Scala programming settings {
   autocmd BufRead,BufNewFile *.scala setfiletype scala
+"}
+
+" --- Vundle {
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
 "}
 
