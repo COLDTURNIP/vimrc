@@ -37,9 +37,6 @@
 [submodule "bundle/trinity"]
 	path = bundle/trinity
 	url = https://github.com/vim-scripts/trinity.vim.git
-[submodule "bundle/neocomplcache"]
-	path = bundle/neocomplcache
-	url = https://github.com/Shougo/neocomplcache.git
 [submodule "bundle/go_syntax"]
 	path = bundle/go_syntax
 	url = https://github.com/vim-scripts/go.vim.git
