@@ -397,6 +397,12 @@ endfun
 
 " --- Cscope {
 if has("cscope")
+  set csto=1
+  set cst
+  set nocsverb
+
+  " Please refer the plugin raphanus_tags for tags autoloading.
+
 "   's'   symbol: find all references to the token under cursor
 "   'g'   global: find global definition(s) of the token under cursor
 "   'c'   calls:  find all calls to the function name under cursor
@@ -429,53 +435,12 @@ if has("cscope")
   nmap <C-\><C-\>F :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
   nmap <C-\><C-\>I :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
   nmap <C-\><C-\>D :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-"    set csto=1
-"    set cst
-"    set nocsverb
-"  "  " add any database in current directory
-"  "  if filereadable("cscope.out")
-"  "    cs add cscope.out
-"  "  " else add database pointed to by environment
-"  "  elseif $CSCOPE_DB == ""
-"  "    let mysrctop = $CDIP_TOP
-"  "    let mytagpath = $CDIP_TAG_PATH
-"  "    if filereadable(mytagpath."/cscope_c.out")
-"  "        autocmd BufRead *.c    exec("cs add ".mytagpath."/cscope_c.out ".mysrctop)
-"  "        autocmd BufRead *.cpp  exec("cs add ".mytagpath."/cscope_c.out ".mysrctop)
-"  "        autocmd BufRead *.h    exec("cs add ".mytagpath."/cscope_c.out ".mysrctop)
-"  "    endif
-"  "    if filereadable(mytagpath."/cscope_j.out")
-"  "        autocmd BufRead *.java exec("cs add ".mytagpath."/cscope_j.out ".mysrctop)
-"  "    endif
-"  "    if filereadable(mytagpath."/cscope.out")
-"  "        autocmd BufRead *.java exec("cs add ".mytagpath."/cscope.out ".mysrctop)
-"  "    endif
-"  "  else
-"  "    cs add $CSCOPE_DB
-"  "  endif
 endif
 "}
 
 
 " --- ctags {
-"  "" add any database in current directory
-"  "if filereadable("tags")
-"  "    set tag=tags
-"  "" else add database pointed to by environment
-"  "else
-"  "    let mysrctop = $CDIP_TOP
-"  "    if filereadable(mysrctop."/.cdip_tags_c")
-"  "        autocmd BufRead *.c    exec("set tag=".mysrctop."/.cdip_tags_c")
-"  "        autocmd BufRead *.cpp  exec("set tag=".mysrctop."/.cdip_tags_c")
-"  "        autocmd BufRead *.h    exec("set tag=".mysrctop."/.cdip_tags_c")
-"  "    endif
-"  "    if filereadable(mysrctop."/.cdip_tags_j")
-"  "        autocmd BufRead *.java exec("set tag=".mysrctop."/.cdip_tags_j ")
-"  "    endif
-"  "    if filereadable(mysrctop."/tags")
-"  "        set tag=mysrctop."/tags"
-"  "    endif
-"  "endif
+  " This part has been moved to plugin raphanus_tags.
 "}
 
 
