@@ -471,6 +471,8 @@ endif
 "}
 
 " --- Go programming settings {
+  " Read $GOROOT/misc/vim to get more information
+  set rtp+=$GOROOT/misc/vim
   autocmd BufRead,BufNewFile *.go setfiletype go
 "}
 
@@ -486,7 +488,6 @@ Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 Bundle 'AutoClose'
 Bundle 'Command-T'
 Bundle 'EasyMotion'
-Bundle 'Go-Syntax'
 Bundle 'javacomplete'
 Bundle 'matchit.zip'
 Bundle 'Source-Explorer-srcexpl.vim'
