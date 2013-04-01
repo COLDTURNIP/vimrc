@@ -485,6 +485,7 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'https://github.com/Valloric/YouCompleteMe.git'
+Bundle 'derekwyatt/vim-scala'
 Bundle 'AutoClose'
 Bundle 'Command-T'
 Bundle 'EasyMotion'
