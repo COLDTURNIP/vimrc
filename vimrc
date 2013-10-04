@@ -306,7 +306,7 @@ endfun
 
 
 " --- EasyMotion {
-  "let g:EasyMotion_leader_key = '<leader>m'
+  let g:EasyMotion_leader_key = '<C-m>'
 "}
 
 " --- vim-latex - many latex shortcuts and snippets {
