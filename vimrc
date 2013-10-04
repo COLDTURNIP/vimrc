@@ -72,6 +72,7 @@ set clipboard=unnamed                 " yank to the system register (*) by defau
 set showmode                          " Show current mode
 set wildchar=<TAB>                    " start wild expansion in the command line using <TAB>
 set wildmenu                          " wild char completion menu
+set wildmode=list,full                " list all matches without completing, then each full match
 set showmatch                         " Cursor shows matching ) and }
 source $VIMRUNTIME/macros/matchit.vim "load smart match plugin
 
