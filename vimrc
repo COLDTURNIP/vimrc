@@ -500,8 +500,6 @@ endif
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
-Bundle 'https://github.com/Valloric/YouCompleteMe.git'
-Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'AutoClose'
 Bundle 'Command-T'
@@ -516,5 +514,8 @@ Bundle 'vimlatex'
 Bundle 'VisIncr'
 Bundle 'xmledit'
 Bundle 'YankRing.vim'
+
+Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 "}
 
