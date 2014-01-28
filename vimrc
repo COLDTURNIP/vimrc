@@ -114,9 +114,11 @@ set tm=500
   "  * sw: set width (for indent).
   "  * ts: tabstop, the width of tab.
   "  * sts: soft tab stop, the width of tab. this set is related to how
-  au FileType bash,css,html,javascript,lua,python,perl,ruby,scala,shell,vim,xml set ai sw=2 ts=2 sts=2 fdm=indent
+  au FileType css,html,javascript,lua,python,perl,ruby,scala,vim,xml set ai sw=2 ts=2 sts=2 fdm=indent
+  au FileType bash,zsh,sh,shell set ai sw=2 ts=2 sts=2 fdm=indent
   au FileType Makefile set ai sw=4 ts=4 sts=4 noet
-  au FileType c,cc,cpp,go,java,vala set ai sw=4 ts=4 sts=4 fdm=indent
+  au FileType c,java,vala set ai sw=4 ts=4 sts=4 fdm=indent
+  au FileType cpp,cc set ai sw=2 ts=2 sts=2 fdm=indent
   au FileType go set ai sw=4 ts=4 sts=4 fdm=indent noet
 "}
 
