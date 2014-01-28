@@ -487,6 +487,15 @@ endif
   autocmd BufRead,BufNewFile *.scala setfiletype scala
 "}
 
+" --- Documentation settings {
+  " The default behavior of dealing *.md is set filetype to modula2 in
+  " $VIMRUNTIME.vim . Hence we need to override it explicitly.
+  augroup filetypedetect
+    autocmd! BufRead,BufNewFile *.md setfiletype markdown
+    autocmd! BufRead,BufNewFile *.markdown setfiletype markdown
+  augroup END
+"}"
+
 " --- Vundle {
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
