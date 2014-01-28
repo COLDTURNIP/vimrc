@@ -379,6 +379,10 @@ endfun
   "let Tlist_WinWidth = 40
 "}
 
+" --- YouCompleteMe {
+  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+"}
+
 
 " --- Source Explorer {
   "nmap <F5> :SrcExplToggle<CR>
