@@ -516,6 +516,7 @@ Bundle 'xmledit'
 Bundle 'YankRing.vim'
 
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+Bundle 'https://github.com/tpope/vim-markdown.git'
 Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 "}
 
