@@ -310,7 +310,17 @@ endfun
 
 
 " --- EasyMotion {
-  let g:EasyMotion_leader_key = '<C-m>'
+  let g:EasyMotion_leader_key = ','
+
+  " And other motions in insert mode
+  inoremap f <C-Right>
+  inoremap b <C-Left>
+  inoremap <C-f> <Right>
+  inoremap <C-b> <Left>
+  inoremap <C-a> <ESC>I
+  inoremap <C-e> <End>
+  inoremap <C-d> <Del>
+  inoremap w <C-Right><C-w>
 "}
 
 " --- vim-latex - many latex shortcuts and snippets {
