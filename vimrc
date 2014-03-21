@@ -471,6 +471,21 @@ endif
 "}
 
 
+" --- syntastic synctax checker {
+  " C++11 support
+  if executable("clang++")
+    let g:syntastic_cpp_compiler = 'clang++'
+    let g:syntastic_cpp_compiler_options = '--std=c++11 --stdlib=libc++'
+    let g:quickrun_config = {}
+    let g:quickrun_config['cpp/clang++11'] = {
+          \ 'cmdopt': '--std=c++11 --stdlib=libc++',
+          \ 'type': 'cpp/clang++'
+          \ }
+    let g:quickrun_config['cpp'] = {'type': 'cpp/clang++11'}
+  endif
+" }
+
+
 " --- Python programming settings {
   " Please install Python compiler before using this command
   autocmd BufRead *.py    map <F9> :!python %<CR>
@@ -529,6 +544,7 @@ Bundle 'xmledit'
 Bundle 'YankRing.vim'
 
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'https://github.com/tpope/vim-markdown.git'
 Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 "}
