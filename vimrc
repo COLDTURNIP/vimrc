@@ -13,6 +13,7 @@ set number         " show line number in default
 "set relativenumber" show related line number in default
 set ruler          " show the cursor position all the time
 set autoread       " auto read when file is changed from outside
+set nowrap         " do not wrap lines by default
 
 
 filetype on           " Enable filetype detection
