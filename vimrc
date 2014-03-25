@@ -35,7 +35,8 @@ if has("gui_running")   " GUI color and font settings
   "set t_Co=256          " 256 color mode
   "colorscheme native
   "colorscheme ir_black
-  colorscheme wombat
+  "colorscheme wombat
+  colorscheme gruvbox
   "colorscheme moria
 
   " font settings {
@@ -55,11 +56,13 @@ if has("gui_running")   " GUI color and font settings
   "}
 else
 " terminal color settings
+  set background=dark
   set t_Co=256          " 256 color mode
   "colorscheme xterm16
   "colorscheme native
   "colorscheme ir_black
-  colorscheme wombat256-rfns
+  "colorscheme wombat256-rfns
+  colorscheme gruvbox
   "colorscheme vgod
 endif
 if v:version >= 703     " show boundary bar at column 80
