@@ -518,6 +518,10 @@ endif
   autocmd BufRead,BufNewFile *.scala setfiletype scala
 "}
 
+" --- Smali programming settings {
+  autocmd BufRead,BufNewFile *.smali setfiletype smali
+"}
+
 " --- Documentation settings {
   " The default behavior of dealing *.md is set filetype to modula2 in
   " $VIMRUNTIME.vim . Hence we need to override it explicitly.
