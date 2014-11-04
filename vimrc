@@ -502,6 +502,11 @@ endif
 "}
 
 
+" --- JavaScript programming settings {
+  autocmd BufRead,BufNewFile *.jsm setfiletype javascript
+"}
+
+
 " --- vala programming settings {
   autocmd BufRead,BufNewFile *.vala setfiletype vala
   autocmd BufRead,BufNewFile *.vapi setfiletype vala
