@@ -562,6 +562,7 @@ Plugin 'https://github.com/Lokaltog/vim-powerline.git'
 Plugin 'https://github.com/scrooloose/syntastic.git'
 Plugin 'https://github.com/tpope/vim-markdown.git'
 Plugin 'https://github.com/Valloric/YouCompleteMe.git'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 call vundle#end()
 filetype plugin indent on
