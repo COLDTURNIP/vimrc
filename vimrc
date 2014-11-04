@@ -539,26 +539,31 @@ endif
 
 " --- Vundle {
 set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'AutoClose'
-Bundle 'Command-T'
-Bundle 'EasyMotion'
-Bundle 'javacomplete'
-Bundle 'matchit.zip'
-Bundle 'Source-Explorer-srcexpl.vim'
-Bundle 'surround.vim'
-Bundle 'taglist.vim'
-Bundle 'trinity.vim'
-Bundle 'vimlatex'
-Bundle 'VisIncr'
-Bundle 'xmledit'
-Bundle 'YankRing.vim'
+call vundle#begin()
 
-Bundle 'https://github.com/Lokaltog/vim-powerline.git'
-Bundle 'https://github.com/scrooloose/syntastic.git'
-Bundle 'https://github.com/tpope/vim-markdown.git'
-Bundle 'https://github.com/Valloric/YouCompleteMe.git'
+Plugin 'gmarik/vundle'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'AutoClose'
+Plugin 'Command-T'
+Plugin 'EasyMotion'
+Plugin 'javacomplete'
+Plugin 'matchit.zip'
+Plugin 'mediawiki.vim'
+Plugin 'Source-Explorer-srcexpl.vim'
+Plugin 'surround.vim'
+Plugin 'taglist.vim'
+Plugin 'trinity.vim'
+Plugin 'vimlatex'
+Plugin 'VisIncr'
+Plugin 'xmledit'
+Plugin 'YankRing.vim'
+
+Plugin 'https://github.com/Lokaltog/vim-powerline.git'
+Plugin 'https://github.com/scrooloose/syntastic.git'
+Plugin 'https://github.com/tpope/vim-markdown.git'
+Plugin 'https://github.com/Valloric/YouCompleteMe.git'
+
+call vundle#end()
+filetype plugin indent on
 "}
 
