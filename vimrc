@@ -467,6 +467,12 @@ endif
 "}
 
 
+" --- EnhancedDiff {
+  " Change default diff algorithm
+  autocmd VimEnter * CustomDiff histogram
+"}
+
+
 " --- Trinity {
   nmap <F4> :TrinityToggleAll<CR>
   nmap <F5> :set hls<Bar>TrinityToggleSourceExplorer<CR>
@@ -564,6 +570,7 @@ call vundle#begin()
 Plugin 'AutoClose'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'Command-T'
+Plugin 'chrisbra/vim-diff-enhanced'
 Plugin 'dgryski/vim-godef'
 Plugin 'EasyMotion'
 Plugin 'fatih/vim-go'
