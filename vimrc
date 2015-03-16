@@ -538,14 +538,15 @@ endif
 "}"
 
 " --- Vundle {
+filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
-Plugin 'gmarik/vundle'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'AutoClose'
+Plugin 'derekwyatt/vim-scala'
 Plugin 'Command-T'
 Plugin 'EasyMotion'
+Plugin 'gmarik/vundle'
 Plugin 'javacomplete'
 Plugin 'matchit.zip'
 Plugin 'mediawiki.vim'
