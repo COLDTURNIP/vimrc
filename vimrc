@@ -515,9 +515,28 @@ endif
 "}
 
 " --- Go programming settings {
-  " Read $GOROOT/misc/vim to get more information
-  set rtp+=$GOROOT/misc/vim
-  autocmd BufRead,BufNewFile *.go setfiletype go
+  " Go editor plugins are removed from official repo since 1.4 .
+  " For 1.3 and older, read $GOROOT/misc/vim to get more information
+  ""set rtp+=$GOROOT/misc/vim
+
+  " use fatih/vim-go as an official plugin alternative
+  au filetypedetect BufRead,BufNewFile *.go setfiletype go
+  au FileType go call SetupGoSettings()
+  function! SetupGoSettings()
+    nmap gf :GoFmt<CR>
+    nmap gi :GoImports<CR>
+    nmap gi :GoImports<CR>
+    nmap gl <Plug>(go-implements)
+    nmap gn <Plug>(go-rename)
+    nmap gs <Plug>(go-info)
+    nmap gc :<C-u>call go#oracle#Callers(-1)<CR>
+  endfunction
+  let g:go_fmt_autosave = 0  " Disable auto fmt on save
+  let g:go_def_mapping_enabled = 0  " disable vim-go's gd to use go-def
+
+  " go-def
+  let g:godef_split = 3
+  let g:godef_same_file_in_same_window = 1
 "}
 
 " --- Scala programming settings {
@@ -545,11 +564,14 @@ call vundle#begin()
 Plugin 'AutoClose'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'Command-T'
+Plugin 'dgryski/vim-godef'
 Plugin 'EasyMotion'
+Plugin 'fatih/vim-go'
 Plugin 'gmarik/vundle'
 Plugin 'javacomplete'
 Plugin 'matchit.zip'
 Plugin 'mediawiki.vim'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'Source-Explorer-srcexpl.vim'
 Plugin 'surround.vim'
 Plugin 'taglist.vim'
@@ -563,7 +585,6 @@ Plugin 'https://github.com/Lokaltog/vim-powerline.git'
 Plugin 'https://github.com/scrooloose/syntastic.git'
 Plugin 'https://github.com/tpope/vim-markdown.git'
 Plugin 'https://github.com/Valloric/YouCompleteMe.git'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 call vundle#end()
 filetype plugin indent on
