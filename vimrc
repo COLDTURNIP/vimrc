@@ -469,7 +469,7 @@ endif
 
 " --- EnhancedDiff {
   " Change default diff algorithm
-  autocmd VimEnter * CustomDiff histogram
+  autocmd VimEnter * EnhancedDiff histogram
 "}
 
 
