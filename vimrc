@@ -569,7 +569,6 @@ call vundle#begin()
 
 Plugin 'AutoClose'
 Plugin 'derekwyatt/vim-scala'
-Plugin 'Command-T'
 Plugin 'chrisbra/vim-diff-enhanced'
 Plugin 'dgryski/vim-godef'
 Plugin 'EasyMotion'
@@ -592,6 +591,7 @@ Plugin 'https://github.com/Lokaltog/vim-powerline.git'
 Plugin 'https://github.com/scrooloose/syntastic.git'
 Plugin 'https://github.com/tpope/vim-markdown.git'
 Plugin 'https://github.com/Valloric/YouCompleteMe.git'
+Plugin 'https://github.com/wincent/command-t.git'
 
 call vundle#end()
 filetype plugin indent on
