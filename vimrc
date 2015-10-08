@@ -308,11 +308,6 @@ endfun
 "---------------------------------------------------------------------------
 
 
-" --- pathogen {
-  call pathogen#infect('bundle-pathogen/{}')
-"}
-
-
 " --- EasyMotion {
   let g:EasyMotion_leader_key = ','
 
@@ -564,7 +559,7 @@ endif
 
 " --- Vundle {
 filetype off
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'AutoClose'
@@ -573,7 +568,7 @@ Plugin 'chrisbra/vim-diff-enhanced'
 Plugin 'dgryski/vim-godef'
 Plugin 'EasyMotion'
 Plugin 'fatih/vim-go'
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'javacomplete'
 Plugin 'matchit.zip'
 Plugin 'mediawiki.vim'
