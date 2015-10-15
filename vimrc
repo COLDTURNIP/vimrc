@@ -562,6 +562,9 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'file://'.$HOME.'/.vim/bundle/raphanus_tags'
+Plugin 'file://'.$HOME.'/.vim/bundle/smali-syntax'
+
 Plugin 'AutoClose'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'chrisbra/vim-diff-enhanced'

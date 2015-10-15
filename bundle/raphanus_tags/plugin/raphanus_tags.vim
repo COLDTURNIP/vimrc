@@ -1,6 +1,6 @@
 " --- cscope {
 if has("cscope")
-  " add any database in current directory                                                                                                                             
+  " add any database in current directory
   if filereadable("cscope.out")
     cs add cscope.out
   " else add database pointed to by environment
