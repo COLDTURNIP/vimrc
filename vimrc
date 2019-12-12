@@ -118,7 +118,7 @@ set tm=500
   "  * sw: set width (for indent).
   "  * ts: tabstop, the width of tab.
   "  * sts: soft tab stop, the width of tab. this set is related to how
-  au FileType css,html,javascript,lua,perl,ruby,scala,vim,xml set ai sw=2 ts=2 sts=2
+  au FileType css,html,javascript,lua,perl,ruby,scala,vim,xml,yaml set ai sw=2 ts=2 sts=2
   au FileType python set ai ts=4 sw=4 sts=4 et
   au FileType bash,zsh,sh,shell set ai sw=2 ts=2 sts=2
   au FileType Makefile set ai sw=4 ts=4 sts=4 noet
@@ -151,7 +151,9 @@ endfunction
 
 
 "Restore cursor to file position in previous editing session
-set viminfo='10,\"100,:20,%,n~/.viminfo
+if !has('nvim')
+  set viminfo='10,\"100,:20,%,n~/.viminfo
+endif
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
 "---------------------------------------------------------------------------
@@ -280,6 +282,7 @@ autocmd BufNewFile,BufRead *.sass             set ft=sass.css
 "---------------------------------------------------------------------------
 " ENCODING SETTINGS
 "---------------------------------------------------------------------------
+scriptencoding utf-8
 set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
@@ -392,8 +395,14 @@ endfun
 "}
 
 " --- YouCompleteMe {
-  let g:ycm_path_to_python_interpreter='/usr/bin/python'
-  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+  let g:ycm_path_to_python_interpreter='/usr/local/bin/python'
+  let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+"}
+
+" --- Lanugage Server {
+let g:LanguageClient_serverCommands = {
+  \ 'go': ['~/go/bin/gopls'],
+  \ }
 "}
 
 
@@ -463,8 +472,13 @@ endif
 
 
 " --- EnhancedDiff {
-  " Change default diff algorithm
-  autocmd VimEnter * EnhancedDiff histogram
+  if has("patch-8.1.0360") || has('nvim')
+    set diffopt+=internal,algorithm:patience
+  else
+    " Change default diff algorithm
+    autocmd VimEnter * EnhancedDiff histogram
+    autocmd FilterWritePre * if &diff | setlocal wrap< | endif
+  endif
 "}
 
 
@@ -488,6 +502,19 @@ endif
           \ }
     let g:quickrun_config['cpp'] = {'type': 'cpp/clang++11'}
   endif
+  let g:syntastic_python_checkers = ['pylint']
+  let g:syntastic_python_flake8_post_args = '--ignore=E123,E221,E241,E302,E501,E701'
+  let g:syntastic_python_pylint_post_args = '--disable=C0111,C0112,C0301,C0321,C0326,C0330,R0903'
+
+  " Syntastic performance tuning
+  au FileType python let g:syntastic_enable_highlighting = 0
+  au FileType python let g:syntastic_enable_balloons = 0
+" }
+
+
+" --- ALE synctax checker {
+  let g:ale_python_flake8_options = '--ignore=E123,E221,E241,E302,E501,E701'
+  let g:ale_python_pylint_options = '--disable=C0111,C0112,C0301,C0321,C0326,C0330,R0903'
 " }
 
 
@@ -557,41 +584,48 @@ endif
   augroup END
 "}"
 
-" --- Vundle {
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" --- Plugin {
+call plug#begin('~/.vim/plugged')
 
-Plugin 'file://'.$HOME.'/.vim/bundle/raphanus_tags'
-Plugin 'file://'.$HOME.'/.vim/bundle/smali-syntax'
+"Plug 'nsf/gocode', {'rtp': 'vim/'}
+"Plug 'vim-scripts/Source-Explorer-srcexpl.vim'
+Plug 'derekwyatt/vim-scala'
+Plug 'easymotion/vim-easymotion'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'kchmck/vim-coffee-script'
+Plug 'kelwin/vim-smali'
+Plug 'ocaml/merlin'
+Plug 'powerline/powerline'
+Plug 'scrooloose/syntastic'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/AutoClose'
+Plug 'vim-scripts/VisIncr'
+Plug 'vim-scripts/YankRing.vim'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/xmledit'
+Plug 'w0rp/ale'
+Plug 'wesleyche/srcexpl'
+Plug 'wesleyche/trinity'
+Plug 'wincent/command-t'
 
-Plugin 'AutoClose'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'chrisbra/vim-diff-enhanced'
-Plugin 'dgryski/vim-godef'
-Plugin 'EasyMotion'
-Plugin 'fatih/vim-go'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'javacomplete'
-Plugin 'matchit.zip'
-Plugin 'mediawiki.vim'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'Source-Explorer-srcexpl.vim'
-Plugin 'surround.vim'
-Plugin 'taglist.vim'
-Plugin 'trinity.vim'
-Plugin 'vimlatex'
-Plugin 'VisIncr'
-Plugin 'xmledit'
-Plugin 'YankRing.vim'
+if !has("patch-8.1.0360")
+  Plug 'chrisbra/vim-diff-enhanced'
+endif
 
-Plugin 'https://github.com/Lokaltog/vim-powerline.git'
-Plugin 'https://github.com/scrooloose/syntastic.git'
-Plugin 'https://github.com/tpope/vim-markdown.git'
-Plugin 'https://github.com/Valloric/YouCompleteMe.git'
-Plugin 'https://github.com/wincent/command-t.git'
+if has('nvim')
+  Plug 'junegunn/fzf'
+  Plug 'autozimu/languageclient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+else
+endif
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !python ./install.py --go-completer --clangd-completer
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 "}
 
