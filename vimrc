@@ -307,8 +307,63 @@ endfun
 
 
 "---------------------------------------------------------------------------
+" PLUGIN INSTALLATION
+"---------------------------------------------------------------------------
+call plug#begin('~/.vim/plugged')
+
+"Plug 'nsf/gocode', {'rtp': 'vim/'}
+"Plug 'vim-scripts/Source-Explorer-srcexpl.vim'
+Plug 'derekwyatt/vim-scala'
+Plug 'easymotion/vim-easymotion'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'kchmck/vim-coffee-script'
+Plug 'kelwin/vim-smali'
+Plug 'ocaml/merlin'
+Plug 'powerline/powerline'
+Plug 'scrooloose/syntastic'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/AutoClose'
+Plug 'vim-scripts/VisIncr'
+Plug 'vim-scripts/YankRing.vim'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/xmledit'
+Plug 'w0rp/ale'
+Plug 'wesleyche/srcexpl'
+Plug 'wesleyche/trinity'
+Plug 'wincent/command-t'
+
+if !has("patch-8.1.0360")
+  Plug 'chrisbra/vim-diff-enhanced'
+endif
+
+if has('nvim')
+  if has('mac')
+    Plug '/usr/local/opt/fzf'
+  else
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  endif
+  Plug 'junegunn/fzf.vim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  "Plug 'autozimu/languageclient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+endif
+Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py --go-completer --clangd-completer' }
+
+call plug#end()
+
+
+"---------------------------------------------------------------------------
 " PLUGIN SETTINGS
 "---------------------------------------------------------------------------
+
+" --- deoplete#enable_at_startup {
+  let g:deoplete#enable_at_startup = 1
+  call deoplete#custom#option('sources', {
+    \ 'go': ['LanguageClient'],
+    \ 'scala': ['LanguageClient'],
+    \ })
+"}
 
 
 " --- EasyMotion {
@@ -324,6 +379,7 @@ endfun
   inoremap <C-d> <Del>
   inoremap w <C-Right><C-w>
 "}
+
 
 " --- vim-latex - many latex shortcuts and snippets {
   " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
@@ -397,12 +453,25 @@ endfun
 " --- YouCompleteMe {
   let g:ycm_path_to_python_interpreter='/usr/local/bin/python'
   let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+  let g:ycm_language_server = [
+    \   { 'name': 'go',
+    \     'filetypes': [ 'go' ],
+    \     'cmdline': [ expand('$HOME/bin/gopls') ],
+    \     'project_root_files': [ 'go.mod' ]
+    \   },
+    \   { 'name': 'scala',
+    \     'filetypes': [ 'scala' ],
+    \     'cmdline': [ expand('$HOME/bin/metals-vim') ],
+    \     'project_root_files': [ 'build.sbt' ]
+    \   },
+    \ ]
 "}
 
-" --- Lanugage Server {
-let g:LanguageClient_serverCommands = {
-  \ 'go': ['~/go/bin/gopls'],
-  \ }
+" --- LSP (Lanugage Server Protocol) client {
+  let g:LanguageClient_serverCommands = {
+    \ 'go': [ expand('$HOME/go/bin/gopls') ],
+    \ 'scala': [ expand('$HOME/bin/metals-vim') ],
+    \ }
 "}
 
 
@@ -535,18 +604,7 @@ endif
 "}
 
 
-" --- vala programming settings {
-  autocmd BufRead,BufNewFile *.vala setfiletype vala
-  autocmd BufRead,BufNewFile *.vapi setfiletype vala
-  autocmd BufRead *.vala set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
-  autocmd BufRead *.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
-"}
-
-" --- Go programming settings {
-  " Go editor plugins are removed from official repo since 1.4 .
-  " For 1.3 and older, read $GOROOT/misc/vim to get more information
-  ""set rtp+=$GOROOT/misc/vim
-
+" --- vim-go Go programming settings {
   " use fatih/vim-go as an official plugin alternative
   au filetypedetect BufRead,BufNewFile *.go setfiletype go
   au FileType go call SetupGoSettings()
@@ -560,11 +618,6 @@ endif
     nmap gc :<C-u>call go#oracle#Callers(-1)<CR>
   endfunction
   let g:go_fmt_autosave = 0  " Disable auto fmt on save
-  let g:go_def_mapping_enabled = 0  " disable vim-go's gd to use go-def
-
-  " go-def
-  let g:godef_split = 3
-  let g:godef_same_file_in_same_window = 1
 "}
 
 " --- Scala programming settings {
@@ -583,49 +636,3 @@ endif
     autocmd! BufRead,BufNewFile *.markdown setfiletype markdown
   augroup END
 "}"
-
-" --- Plugin {
-call plug#begin('~/.vim/plugged')
-
-"Plug 'nsf/gocode', {'rtp': 'vim/'}
-"Plug 'vim-scripts/Source-Explorer-srcexpl.vim'
-Plug 'derekwyatt/vim-scala'
-Plug 'easymotion/vim-easymotion'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'kchmck/vim-coffee-script'
-Plug 'kelwin/vim-smali'
-Plug 'ocaml/merlin'
-Plug 'powerline/powerline'
-Plug 'scrooloose/syntastic'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-surround'
-Plug 'vim-scripts/AutoClose'
-Plug 'vim-scripts/VisIncr'
-Plug 'vim-scripts/YankRing.vim'
-Plug 'vim-scripts/taglist.vim'
-Plug 'vim-scripts/xmledit'
-Plug 'w0rp/ale'
-Plug 'wesleyche/srcexpl'
-Plug 'wesleyche/trinity'
-Plug 'wincent/command-t'
-
-if !has("patch-8.1.0360")
-  Plug 'chrisbra/vim-diff-enhanced'
-endif
-
-if has('nvim')
-  Plug 'junegunn/fzf'
-  Plug 'autozimu/languageclient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-else
-endif
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !python ./install.py --go-completer --clangd-completer
-  endif
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-
-call plug#end()
-"}
-
