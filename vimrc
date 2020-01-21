@@ -348,7 +348,7 @@ if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   "Plug 'autozimu/languageclient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 endif
-Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py --go-completer --clangd-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py --go-completer --clangd-completer --rust-completer' }
 
 call plug#end()
 
@@ -459,12 +459,21 @@ call plug#end()
     \     'cmdline': [ expand('$HOME/bin/gopls') ],
     \     'project_root_files': [ 'go.mod' ]
     \   },
+    "\   {
+    "\     'name': 'rust',
+    "\     'cmdline': [ 'ra_lsp_server' ],
+    "\     'filetypes': [ 'rust' ],
+    "\     'project_root_files': [ 'Cargo.toml' ]
+    "\   }
     \   { 'name': 'scala',
     \     'filetypes': [ 'scala' ],
     \     'cmdline': [ expand('$HOME/bin/metals-vim') ],
     \     'project_root_files': [ 'build.sbt' ]
     \   },
     \ ]
+  if executable('rustc')
+    let g:ycm_rust_src_path = substitute(system('rustc --print sysroot'), '\n\+$', '', '') . '/lib/rustlib/src/rust/src'
+  endif
 "}
 
 " --- LSP (Lanugage Server Protocol) client {
