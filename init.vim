@@ -320,6 +320,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'derekwyatt/vim-scala'
 Plug 'easymotion/vim-easymotion'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'jiangmiao/auto-pairs'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kelwin/vim-smali'
 Plug 'ocaml/merlin'
@@ -328,7 +329,6 @@ Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/AutoClose'
 Plug 'vim-scripts/VisIncr'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'vim-scripts/taglist.vim'
@@ -466,24 +466,12 @@ ENDLUA
 "}
 
 
-" --- AutoClose - Inserts matching bracket, paren, brace or quote {
-" fixed the arrow key problems caused by AutoClose
-  if !has("gui_running")
-    "set term=linux
-    imap OA <ESC>ki
-    imap OB <ESC>ji
-    imap OC <ESC>li
-    imap OD <ESC>hi
-
-    nmap OA k
-    nmap OB j
-    nmap OC l
-    nmap OD h
-  endif
-" auto indent after inserting a newline after a brace
-  inoremap {<CR> {<CR>}<ESC>O
-  "inoremap [<CR> [<CR>]<ESC>O
-  "inoremap (<CR> (<CR>)<ESC>O
+" --- Auto Pairs - Insert or delete brackets, parens, quotes in pair. {
+  " See :h autopairs-options for options
+  let g:AutoPairsShortcutToggle = ''     " always enable auto pairs
+  let g:AutoPairsShortcutJump = ''       " VIM already provides %
+  let g:AutoPairsShortcutBackInsert = '' " autopairs-flymode insert key
+  let g:AutoPairsMapCh = 0               " do not map <C-h>
 "}
 
 
