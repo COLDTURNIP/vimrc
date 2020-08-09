@@ -189,9 +189,9 @@ map <leader>[ :cp<CR>
 
 " --- move around splits {
 " move to and maximize the below split
-map <C-J> <C-W>j<C-W>_
+"map <C-J> <C-W>j<C-W>_
 " move to and maximize the above split
-map <C-K> <C-W>k<C-W>_
+"map <C-K> <C-W>k<C-W>_
 " move to and maximize the left split
 "nmap <c-h> <c-w>h<c-w><bar>
 " move to and maximize the right split
@@ -203,9 +203,9 @@ set wmh=0                     " set the min height of a window to 0 so we can ma
 " move around tabs. conflict with the original screen top/bottom
 " comment them out if you want the original H/L
 " go to prev tab
-map <C-h> gT
+"map <C-h> gT
 " go to next tab
-map <C-l> gt
+"map <C-l> gt
 
 " new tab
 map <C-t><C-t> :tabnew<CR>
@@ -348,11 +348,14 @@ if has('nvim')
   else
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
   endif
+  Plug 'neovim/nvim-lsp'
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
   Plug 'junegunn/fzf.vim'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  "Plug 'autozimu/languageclient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+else
+  Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py --go-completer --clangd-completer --rust-completer' }
 endif
-Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py --go-completer --clangd-completer --rust-completer' }
 
 call plug#end()
 
@@ -361,12 +364,78 @@ call plug#end()
 " PLUGIN SETTINGS
 "---------------------------------------------------------------------------
 
-" --- deoplete#enable_at_startup {
-  autocmd FileType c,h,cpp,hpp,python,js,java,go,rust,ts call deoplete#custom#buffer_option('auto_complete', v:false)
-  let g:deoplete#enable_at_startup = 1
-  call deoplete#custom#option('sources', {
-    \ 'scala': ['LanguageClient'],
-    \ })
+" --- NeoVIM built-in LSP client {
+  " Rust: setup rust-analyzer first
+  "       e.g. brew install rust-analyzer && rustup component add rust-src
+  ""lua require'nvim_lsp'.rust_analyzer.setup{}
+
+  " Go: setup gopls first
+  ""lua require'nvim_lsp'.gopls.setup{}
+
+  " Python: setup pyls first
+  ""lua require'nvim_lsp'.pyls.setup{cmd = {'/usr/local/opt/pyenv/versions/neovim38/bin/pyls'}}
+
+  autocmd BufEnter * lua require'completion'.on_attach()
+  :lua << ENDLUA
+        function prequire(...)
+            local status, lib = pcall(require, ...)
+            if status then
+                return lib
+            end
+            return nil
+        end
+        local nvim_lsp = prequire('nvim_lsp')
+        local completion = prequire('completion')
+
+        if nvim_lsp and completion then
+            -- Rust: setup rust-analyzer first
+            --       e.g. brew install rust-analyzer && rustup component add rust-src
+            nvim_lsp.rust_analyzer.setup { on_attach = completion.on_attach }
+
+            -- Go: setup gopls first
+            nvim_lsp.gopls.setup { on_attach = completion.on_attach }
+
+            -- Python: setup pyls first
+            nvim_lsp.pyls.setup {
+                cmd = {'/usr/local/opt/pyenv/versions/neovim38/bin/pyls'};
+                settings = {python = {linting = {enabled = false}}};
+                on_attach = completion.on_attach;
+            }
+
+            vim.lsp.callbacks['textDocument/publishDiagnostics'] = nil
+        end
+ENDLUA
+
+  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+  nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+  "nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+  nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+  " Use <Tab> and <S-Tab> to navigate through popup menu
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+  " Set completeopt to have a better completion experience
+  set completeopt=menuone,noinsert,noselect
+
+  " Avoid showing message extra message when using completion
+  set shortmess+=c
+
+  " Snippet integration
+  let g:completion_enable_snippet = 'vim-vsnip'
+"}
+
+" --- VIM-Vsnip {
+  " Expand snippet by completion-nvim. Uncomment while this was moved out from completer.
+  "imap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+  imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+  smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 "}
 
 
@@ -455,7 +524,7 @@ call plug#end()
 "}
 
 " --- YouCompleteMe {
-  let g:ycm_path_to_python_interpreter='/usr/local/bin/python'
+  let g:ycm_server_python_interpreter='/usr/local/bin/python3'
   let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
   let g:ycm_language_server = [
     \   { 'name': 'go',
@@ -479,14 +548,6 @@ call plug#end()
     let g:ycm_rust_src_path = substitute(system('rustc --print sysroot'), '\n\+$', '', '') . '/lib/rustlib/src/rust/src'
   endif
 "}
-
-" --- LSP (Lanugage Server Protocol) client {
-  let g:LanguageClient_serverCommands = {
-    \ 'go': [ expand('$HOME/go/bin/gopls') ],
-    \ 'scala': [ expand('$HOME/bin/metals-vim') ],
-    \ }
-"}
-
 
 " --- Source Explorer {
   "nmap <F5> :SrcExplToggle<CR>
