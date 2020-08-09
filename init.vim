@@ -14,6 +14,10 @@ set number         " show line number in default
 set ruler          " show the cursor position all the time
 set autoread       " auto read when file is changed from outside
 set nowrap         " do not wrap lines by default
+if has('nvim')
+  let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim2/bin/python'
+  let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim38/bin/python'
+endif
 
 
 filetype on           " Enable filetype detection
