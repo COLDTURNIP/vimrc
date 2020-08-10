@@ -323,11 +323,11 @@ call plug#begin('~/.vim/plugged')
 "Plug 'vim-scripts/Source-Explorer-srcexpl.vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'easymotion/vim-easymotion'
+Plug 'ekalinin/dockerfile.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kelwin/vim-smali'
-Plug 'ocaml/merlin'
 Plug 'powerline/powerline'
 Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-multiple-cursors'
