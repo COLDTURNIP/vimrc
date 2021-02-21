@@ -352,7 +352,7 @@ if has('nvim')
   else
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
   endif
-  Plug 'neovim/nvim-lsp'
+  Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
@@ -381,32 +381,25 @@ call plug#end()
 
   autocmd BufEnter * lua require'completion'.on_attach()
   :lua << ENDLUA
-        function prequire(...)
-            local status, lib = pcall(require, ...)
-            if status then
-                return lib
-            end
-            return nil
-        end
-        local nvim_lsp = prequire('nvim_lsp')
-        local completion = prequire('completion')
+        local nvim_lsp = require('lspconfig')
 
-        if nvim_lsp and completion then
+        if nvim_lsp then
             -- Rust: setup rust-analyzer first
             --       e.g. brew install rust-analyzer && rustup component add rust-src
-            nvim_lsp.rust_analyzer.setup { on_attach = completion.on_attach }
+            nvim_lsp.rust_analyzer.setup {
+                cmd = {'/usr/local/bin/rust-analyzer'};
+            }
 
             -- Go: setup gopls first
-            nvim_lsp.gopls.setup { on_attach = completion.on_attach }
+            nvim_lsp.gopls.setup {}
 
             -- Python: setup pyls first
             nvim_lsp.pyls.setup {
                 cmd = {'/usr/local/opt/pyenv/versions/neovim38/bin/pyls'};
                 settings = {python = {linting = {enabled = false}}};
-                on_attach = completion.on_attach;
             }
 
-            vim.lsp.callbacks['textDocument/publishDiagnostics'] = nil
+            -- vim.lsp.set_log_level("debug")
         end
 ENDLUA
 
