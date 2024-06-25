@@ -1,8 +1,9 @@
+---@type MappingsTable
+
 -- Refer to .config/nvim/lua/core/mappings.lua
 local M = {}
 
--- base config
-M.base = {
+M.general = {
   n = {
     ["<leader>["] = { "<cmd> cp <CR>", "jump to previous error" },
     ["<leader>]"] = { "<cmd> cn <CR>", "jump to next error" },
@@ -38,44 +39,6 @@ M.base_nevigation = {
   },
 }
 
--- plugin: phaazon/hop.nvim
-do
-  -- available functions: https://github.com/phaazon/hop.nvim/blob/master/plugin/hop.vim
-  local hop = require "hop"
-  local directions = require("hop.hint").HintDirection
-  local keymap = {
-    ["f"] = {
-      function()
-        hop.hint_char1 { current_line_only = true }
-      end,
-      "hop to inline position",
-    },
-    [",,b"] = {
-      function()
-        hop.hint_words { direction = directions.BEFORE_CURSOR }
-      end,
-      "hop to word backward",
-    },
-    [",,w"] = {
-      function()
-        hop.hint_words { direction = directions.AFTER_CURSOR }
-      end,
-      "hop to word forward",
-    },
-    [",,k"] = {
-      function()
-        hop.hint_vertical { direction = directions.BEFORE_CURSOR }
-      end,
-      "hop to line backward",
-    },
-    [",,j"] = {
-      function()
-        hop.hint_vertical { direction = directions.AFTER_CURSOR }
-      end,
-      "hop to line forward",
-    },
-  }
-  M.plugin_hop = { n = keymap, v = keymap, o = keymap }
-end
+-- plugins: defined in custom/config/<plugin>.lua, and setup in custom/plugins.loa
 
 return M

@@ -8,6 +8,7 @@ opt.clipboard = "unnamedplus"
 opt.timeoutlen = 500
 opt.winminwidth = 0 -- set the min width of a window to 0 so we can maximize others
 opt.winminheight = 0 -- set the min height of a window to 0 so we can maximize others
+global.mapleader = ","
 
 -- line numbers
 opt.number = true -- show line number in default
@@ -43,5 +44,4 @@ opt.mouse = nil -- disable mouse integration
 
 -- providers: Python
 global.loaded_python3_provider = nil -- enable Python3 provider
-global.python_host_prog = "/Users/coldturnip/.pyenv/versions/neovim2/bin/python" -- deprecated
-global.python3_host_prog = "/Users/coldturnip/.pyenv/versions/neovim38/bin/python"
+global.python3_host_prog = "/Users/coldturnip/.pyenv/versions/neovim311/bin/python"
