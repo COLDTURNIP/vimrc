@@ -1,47 +1,39 @@
--- Refer to :h nvim-defaults and .config/nvim/lua/core/options.lua for default settings.
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+vim.g.mapleader = " "
 
-local opt = vim.opt
-local global = vim.g
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
-opt.wrap = false -- do not wrap lines by default
-opt.clipboard = "unnamedplus"
-opt.timeoutlen = 500
-opt.winminwidth = 0 -- set the min width of a window to 0 so we can maximize others
-opt.winminheight = 0 -- set the min height of a window to 0 so we can maximize others
-global.mapleader = ","
+if not vim.loop.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+end
 
--- line numbers
-opt.number = true -- show line number in default
-opt.relativenumber = false -- show related line number in default
-opt.ruler = true -- show the cursor position all the time
+vim.opt.rtp:prepend(lazypath)
 
--- cursor
-opt.cursorline = true -- highlight current line
-opt.cursorcolumn = true -- highlight current column
-opt.colorcolumn = "81"
-opt.showmatch = true -- Cursor shows matching ) and }
+local lazy_config = require "configs.lazy"
 
--- indenting
-opt.copyindent = true -- copy the previous indentation on autoindenting
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.smartindent = true
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.list = true -- show blank characters
-opt.listchars = {
-  tab = "»·",
-  trail = "·",
-}
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+    config = function()
+      require "options"
+    end,
+  },
 
--- search
-opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true -- ignore case if search pattern is all lowercase,case-sensitive otherwise
-opt.inccommand = "nosplit" -- interactive replace
+  { import = "plugins" },
+}, lazy_config)
 
--- mouse
-opt.mouse = nil -- disable mouse integration
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
 
--- providers: Python
-global.loaded_python3_provider = nil -- enable Python3 provider
-global.python3_host_prog = "/Users/coldturnip/.pyenv/versions/neovim311/bin/python"
+require "nvchad.autocmds"
+
+vim.schedule(function()
+  require "mappings"
+end)
