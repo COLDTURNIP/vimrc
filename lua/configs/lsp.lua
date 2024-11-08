@@ -9,7 +9,7 @@ local servers = {
   "rust_analyzer", -- rust
   "gopls", -- go
   "pylsp", -- python
-  "tsserver", -- typescript
+  "ts_ls", -- typescript
 }
 
 for _, lsp in ipairs(servers) do
