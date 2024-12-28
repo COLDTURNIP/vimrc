@@ -2,7 +2,6 @@ local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
-local lspconfig = require "lspconfig"
 local servers = {
   "html", "cssls",
   "dockerls",
@@ -12,19 +11,32 @@ local servers = {
   "ts_ls", -- typescript
 }
 
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-  }
-end
 
-lspconfig["denols"].setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+local M = {
+  opts = {
+    document_highlight = {
+      enabled = true,
+    },
+  },
+
+  config = function()
+    local lspconfig = require "lspconfig"
+    for _, lsp in ipairs(servers) do
+      lspconfig[lsp].setup {
+        on_attach = on_attach,
+        on_init = on_init,
+        capabilities = capabilities,
+      }
+    end
+
+    lspconfig["denols"].setup {
+      on_attach = on_attach,
+      on_init = on_init,
+      capabilities = capabilities,
+      root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+    }
+    return lspconfig
+  end,
 }
 
-return lspconfig
+return M

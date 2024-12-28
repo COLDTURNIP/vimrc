@@ -9,6 +9,9 @@ M.override = {
   Comment = {
     italic = true,
   },
+  LspReferenceText = { fg = "orange", bg = "NONE" },
+  LspReferenceRead = { fg = "orange", bg = "NONE" },
+  LspReferenceWrite = { fg = "orange", bg = "NONE" },
 }
 
 ---@type HLTable

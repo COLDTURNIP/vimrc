@@ -31,8 +31,9 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       require("nvchad.configs.lspconfig").defaults()
-      require "configs.lsp"
+      require("configs.lsp").config()
     end,
+    opts = require("configs.lsp").opts
   },
   {
     "williamboman/mason.nvim",
@@ -45,8 +46,8 @@ return {
 
   -- customized plugins
   {
-    "phaazon/hop.nvim",
-    branch = "v2", -- optional but strongly recommended
+    "smoka7/hop.nvim",
+    version = "*",
     keys = require("configs.hop").keys,
     config = require("configs.hop").config,
     lazy = false,
