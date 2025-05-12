@@ -2,6 +2,12 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+-- NvChad built-in recommend
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("i", "jk", "<ESC>")
+-- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+-- customized
 map("n", "<leader>[", "<cmd> cp <CR>", { desc = "jump to previous error" })
 map("n", "<leader>]", "<cmd> cn <CR>", { desc = "jump to next error" })
 map("v", "<leader>[", "<cmd> cp <CR>", { desc = "jump to previous error" })

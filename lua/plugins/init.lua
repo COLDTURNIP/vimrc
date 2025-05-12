@@ -1,50 +1,31 @@
 return {
+  {
+    "stevearc/conform.nvim",
+    -- event = 'BufWritePre', -- uncomment for format on save
+    opts = require "configs.conform",
+  },
+
   -- These are some examples, uncomment them if you want to see them work!
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   config = function()
-  --     require("nvchad.configs.lspconfig").defaults()
-  --     require "configs.lspconfig"
-  --   end,
-  -- },
-  --
-  -- {
-  -- 	"williamboman/mason.nvim",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"lua-language-server", "stylua",
-  -- 			"html-lsp", "css-lsp" , "prettier"
-  -- 		},
-  -- 	},
-  -- },
-  --
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require("nvchad.configs.lspconfig").defaults()
-      require("configs.lsp").config()
+      require "configs.lspconfig"
     end,
-    opts = require("configs.lsp").opts
   },
-  {
-    "williamboman/mason.nvim",
-    opts = require "configs.mason",
-  },
+
+  -- test new blink
+  { import = "nvchad.blink.lazyspec" },
+
   {
     "nvim-treesitter/nvim-treesitter",
   	opts = require "configs.treesitter",
   },
 
   -- customized plugins
+  {
+    "williamboman/mason.nvim",
+    opts = require "configs.mason",
+  },
   {
     "smoka7/hop.nvim",
     version = "*",
@@ -58,20 +39,6 @@ return {
   },
   {
     "tpope/vim-surround",
-  },
-  { -- formater
-    "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
-    config = function()
-      require "configs.conform"
-    end,
-  },
-  { -- formater
-    "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
-    config = function()
-      require "configs.conform"
-    end,
   },
   -- { -- linter
   --   'mfussenegger/nvim-lint',
